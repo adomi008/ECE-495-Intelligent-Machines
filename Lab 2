@@ -1,0 +1,27 @@
+#include <AFMotor.h>
+AF_DCMotor motor(1, MOTOR12_64KHZ);
+int led = 13;
+byte value;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial1.begin(9600);
+pinMode(led,OUTPUT);
+motor.setSpeed(200);
+}
+
+void loop() {
+if(Serial1.available())
+value = Serial1.read();
+if(value== '1')
+{
+  digitalWrite(led,HIGH);
+  motor.run(FORWARD);
+  delay(1000);
+}
+else if(value == '2'){
+  digitalWrite(led,LOW);
+  motor.run(BACKWARD);
+  delay(1000);
+}
+}
